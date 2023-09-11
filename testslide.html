@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slidable Image Collection</title>
+    <style>
+        /* Styles for the container and slider */
+        .slider-container {
+            width: 300px; /* Adjust the width as needed */
+            overflow: hidden;
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+        .slide {
+            flex: 0 0 100%;
+            margin-right: 10px; /* Adjust spacing between slides */
+        }
+        /* Style for the navigation buttons */
+        .slider-controls {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .slider-controls button {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img src="image1.jpg" alt="Image 1"></div>
+            <div class="slide"><img src="image2.jpg" alt="Image 2"></div>
+            <div class="slide"><img src="image3.jpg" alt="Image 3"></div>
+            <!-- Add more slides with images as needed -->
+        </div>
+    </div>
+
+    <div class="slider-controls">
+        <button onclick="prevSlide()">Previous</button>
+        <button onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slides = document.querySelectorAll('.slide');
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            } else if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+
+            const offset = -slideIndex * 100 + '%';
+            document.querySelector('.slider').style.transform = `translateX(${offset})`;
+        }
+
+        function prevSlide() {
+            slideIndex--;
+            showSlides();
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlides();
+        }
+
+        // Initial call to display the first slide
+        showSlides();
+    </script>
+</body>
+</html>
